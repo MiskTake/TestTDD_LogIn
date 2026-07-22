@@ -1,0 +1,18 @@
+# Maven
+target/
+
+# Archivos compilados (por si el IDE compila fuera de target/)
+*.class
+bin/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Configuración local de Claude Code
+.claude/settings.local.json
