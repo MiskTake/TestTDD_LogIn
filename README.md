@@ -53,7 +53,7 @@ com.socialapp
 |---|---|---|
 | `Email` | domain.valueobject | Value Object inmutable que valida el formato de un correo al construirse |
 | `Password` | domain.valueobject | Value Object inmutable que valida la fortaleza de una contraseña al construirse |
-| `User` | domain.entity | Entidad de dominio con identidad (email) y comportamiento (`authenticatesWith`) |
+| `User` | domain.entity | Entidad de dominio con identidad propia (`id`, generado al registrarse) y comportamiento (`authenticatesWith`) |
 | `UserRepository` | domain.repository | Contrato de persistencia de usuarios (interfaz, sin dependencias técnicas) |
 | `VerificationCodeValidator` | domain.service | Compara un código ingresado contra el generado |
 | `RegisterUserUseCase` | application.usecase | Registra un usuario nuevo, validando email, contraseña y duplicados |
