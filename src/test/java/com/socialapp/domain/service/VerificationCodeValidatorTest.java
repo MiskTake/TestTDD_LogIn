@@ -1,4 +1,4 @@
-package com.socialapp.domain;
+package com.socialapp.domain.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package com.socialapp.domain;
+package com.socialapp.domain.service;
 
 import com.socialapp.domain.exception.InvalidVerificationCodeException;
 

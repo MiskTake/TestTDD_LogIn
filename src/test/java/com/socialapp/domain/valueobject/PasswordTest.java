@@ -1,21 +1,13 @@
-package com.socialapp.domain;
+package com.socialapp.domain.valueobject;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import com.socialapp.domain.exception.WeakPasswordException;
 
-@DisplayName("Validador de Contraseñas (PasswordValidator)")
-public class PasswordValidatorTest {
-
-    private PasswordValidator validator;
-
-    @BeforeEach
-    public void setUp() {
-        validator = new PasswordValidator();
-    }
+@DisplayName("Value Object de Contraseña (Password)")
+public class PasswordTest {
 
     @Test
     @DisplayName("Debe lanzar WeakPasswordException cuando la contraseña tiene menos de 8 caracteres")
@@ -25,7 +17,7 @@ public class PasswordValidatorTest {
 
         // Act & Assert
         assertThrows(WeakPasswordException.class, () -> {
-            validator.validate(shortPassword);
+            new Password(shortPassword);
         });
     }
 
@@ -34,7 +26,7 @@ public class PasswordValidatorTest {
     public void shouldThrowWeakPasswordExceptionWhenPasswordIsNull() {
         // Act & Assert
         assertThrows(WeakPasswordException.class, () -> {
-            validator.validate(null);
+            new Password(null);
         });
     }
 
@@ -46,7 +38,7 @@ public class PasswordValidatorTest {
 
         // Act & Assert
         assertDoesNotThrow(() -> {
-            validator.validate(validPassword);
+            new Password(validPassword);
         });
     }
 

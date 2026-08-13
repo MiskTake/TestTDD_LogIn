@@ -1,21 +1,13 @@
-package com.socialapp.domain;
+package com.socialapp.domain.valueobject;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import com.socialapp.domain.exception.InvalidEmailException;
 
-@DisplayName("Validador de Correo (EmailValidator)")
-public class EmailValidatorTest {
-
-    private EmailValidator validator;
-
-    @BeforeEach
-    public void setUp() {
-        validator = new EmailValidator();
-    }
+@DisplayName("Value Object de Correo (Email)")
+public class EmailTest {
 
     @Test
     @DisplayName("Debe lanzar InvalidEmailException cuando el correo no contiene '@'")
@@ -25,7 +17,7 @@ public class EmailValidatorTest {
 
         // Act & Assert
         assertThrows(InvalidEmailException.class, () -> {
-            validator.validate(invalidEmail);
+            new Email(invalidEmail);
         });
     }
 
@@ -34,7 +26,7 @@ public class EmailValidatorTest {
     public void shouldThrowInvalidEmailExceptionWhenEmailIsNull() {
         // Act & Assert
         assertThrows(InvalidEmailException.class, () -> {
-            validator.validate(null);
+            new Email(null);
         });
     }
 
@@ -46,7 +38,7 @@ public class EmailValidatorTest {
 
         // Act & Assert
         assertDoesNotThrow(() -> {
-            validator.validate(validEmail);
+            new Email(validEmail);
         });
     }
 

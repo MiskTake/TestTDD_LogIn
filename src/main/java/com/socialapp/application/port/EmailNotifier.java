@@ -1,4 +1,4 @@
-package com.socialapp.domain;
+package com.socialapp.application.port;
 
 public interface EmailNotifier {
     void sendEmail(String destination, String content);
