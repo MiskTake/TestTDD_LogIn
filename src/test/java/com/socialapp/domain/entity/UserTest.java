@@ -14,7 +14,7 @@ public class UserTest {
     @DisplayName("Debe autenticar cuando la contraseña candidata coincide con la almacenada")
     public void shouldAuthenticateWhenCandidatePasswordMatches() {
         // Arrange
-        User user = new User(new Email("usuario@gmail.com"), new Password("contraseñaSegura123"));
+        User user = new User("user-1", new Email("usuario@gmail.com"), new Password("contraseñaSegura123"));
 
         // Act & Assert
         assertTrue(user.authenticatesWith(new Password("contraseñaSegura123")));
@@ -24,20 +24,31 @@ public class UserTest {
     @DisplayName("No debe autenticar cuando la contraseña candidata no coincide")
     public void shouldNotAuthenticateWhenCandidatePasswordDoesNotMatch() {
         // Arrange
-        User user = new User(new Email("usuario@gmail.com"), new Password("contraseñaSegura123"));
+        User user = new User("user-1", new Email("usuario@gmail.com"), new Password("contraseñaSegura123"));
 
         // Act & Assert
         assertFalse(user.authenticatesWith(new Password("otraContraseña123")));
     }
 
     @Test
-    @DisplayName("Dos usuarios con el mismo email deben ser iguales (identidad de entidad)")
-    public void shouldBeEqualWhenEmailIsTheSame() {
+    @DisplayName("Dos usuarios con el mismo id deben ser iguales aunque sus atributos difieran (identidad de entidad)")
+    public void shouldBeEqualWhenIdIsTheSameEvenIfAttributesDiffer() {
         // Arrange
-        User first = new User(new Email("usuario@gmail.com"), new Password("contraseñaSegura123"));
-        User second = new User(new Email("usuario@gmail.com"), new Password("otraContraseña123"));
+        User first = new User("user-1", new Email("uno@gmail.com"), new Password("contraseñaSegura123"));
+        User second = new User("user-1", new Email("dos@gmail.com"), new Password("otraContraseña123"));
 
         // Act & Assert
         assertEquals(first, second);
+    }
+
+    @Test
+    @DisplayName("Dos usuarios con distinto id no deben ser iguales aunque compartan el mismo email")
+    public void shouldNotBeEqualWhenIdDiffersEvenIfEmailMatches() {
+        // Arrange
+        User first = new User("user-1", new Email("usuario@gmail.com"), new Password("contraseñaSegura123"));
+        User second = new User("user-2", new Email("usuario@gmail.com"), new Password("contraseñaSegura123"));
+
+        // Act & Assert
+        assertNotEquals(first, second);
     }
 }

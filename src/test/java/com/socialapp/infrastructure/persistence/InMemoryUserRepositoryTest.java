@@ -31,7 +31,7 @@ public class InMemoryUserRepositoryTest {
     public void shouldFindSavedUserByEmail() {
         // Arrange
         Email email = new Email("usuario@gmail.com");
-        User user = new User(email, new Password("contraseñaSegura123"));
+        User user = new User("user-1", email, new Password("contraseñaSegura123"));
 
         // Act
         repository.save(user);

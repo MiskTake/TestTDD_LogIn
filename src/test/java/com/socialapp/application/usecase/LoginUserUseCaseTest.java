@@ -43,7 +43,7 @@ public class LoginUserUseCaseTest {
         // Arrange
         Mockito.when(repositoryMock.existsByEmail(new Email("usuario@gmail.com"))).thenReturn(true);
         Mockito.when(repositoryMock.findByEmail(new Email("usuario@gmail.com")))
-                .thenReturn(new User(new Email("usuario@gmail.com"), new Password("contraseñaCorrecta123")));
+                .thenReturn(new User("user-1", new Email("usuario@gmail.com"), new Password("contraseñaCorrecta123")));
 
         // Act & Assert
         assertThrows(InvalidCredentialsException.class, () -> {
@@ -57,7 +57,7 @@ public class LoginUserUseCaseTest {
         // Arrange
         Mockito.when(repositoryMock.existsByEmail(new Email("usuario@gmail.com"))).thenReturn(true);
         Mockito.when(repositoryMock.findByEmail(new Email("usuario@gmail.com")))
-                .thenReturn(new User(new Email("usuario@gmail.com"), new Password("contraseñaSegura123")));
+                .thenReturn(new User("user-1", new Email("usuario@gmail.com"), new Password("contraseñaSegura123")));
 
         // Act & Assert
         assertDoesNotThrow(() -> {

@@ -6,6 +6,8 @@ import com.socialapp.domain.repository.UserRepository;
 import com.socialapp.domain.valueobject.Email;
 import com.socialapp.domain.valueobject.Password;
 
+import java.util.UUID;
+
 public class RegisterUserUseCase {
 
     private final UserRepository userRepository;
@@ -22,6 +24,7 @@ public class RegisterUserUseCase {
             throw new EmailAlreadyRegisteredException();
         }
 
-        userRepository.save(new User(email, password));
+        String id = UUID.randomUUID().toString();
+        userRepository.save(new User(id, email, password));
     }
 }

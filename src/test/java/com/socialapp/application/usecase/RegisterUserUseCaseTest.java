@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import com.socialapp.domain.entity.User;
 import com.socialapp.domain.exception.EmailAlreadyRegisteredException;
@@ -35,9 +36,12 @@ public class RegisterUserUseCaseTest {
         // Act
         useCase.execute("nuevo@gmail.com", "contraseñaSegura123");
 
-        // Assert
-        Mockito.verify(repositoryMock, Mockito.times(1))
-                .save(new User(new Email("nuevo@gmail.com"), new Password("contraseñaSegura123")));
+        // Assert: el id lo genera el caso de uso, así que se captura al usuario guardado
+        // y se verifica su comportamiento en vez de comparar contra un id predefinido.
+        ArgumentCaptor<User> savedUser = ArgumentCaptor.forClass(User.class);
+        Mockito.verify(repositoryMock, Mockito.times(1)).save(savedUser.capture());
+        assertEquals(new Email("nuevo@gmail.com"), savedUser.getValue().email());
+        assertTrue(savedUser.getValue().authenticatesWith(new Password("contraseñaSegura123")));
     }
 
     @Test
